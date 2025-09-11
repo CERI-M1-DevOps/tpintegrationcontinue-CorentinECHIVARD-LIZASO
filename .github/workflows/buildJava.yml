@@ -13,7 +13,7 @@ jobs:
         # use action actions/checkout@v4 to checkout the repository
         uses: actions/checkout@v4
         with :
-          repository: 'tpintegrationcontinue-CorentinECHIVARD-LIZASO'
+          repository: ''
 
       # use action actions/setup-java@v4 and version 21 and the distribution corretto
       - name: Set up JDK 21
