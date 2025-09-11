@@ -24,12 +24,14 @@ public class ListeSimple {
     public void modifieTous(Object element, Object nouvelleValeur) {
         Noeud courant = tete;
         while (courant != null) {
-            if (courant.getElement() == element)
+            if (courant.getElement() == element) {
                 courant.setElement(nouvelleValeur);
+            }
             courant = courant.getSuivant();
         }
     }
 
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("ListeSimple(");
         Noeud n = tete;

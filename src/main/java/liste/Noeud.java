@@ -25,6 +25,7 @@ public class Noeud {
         this.suivant = suivant;
     }
 
+    @Override
     public String toString() {
         return "Noeud(" + element + ")";
     }
