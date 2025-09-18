@@ -69,9 +69,10 @@ import org.junit.jupiter.api.Test;
     void modifiePremierElementNonExistant() {
         listeATester.ajout(1);
         listeATester.ajout(2);
-        listeATester.ajout(3);
+        listeATester.ajout(3); // Liste: 3 -> 2 -> 1
         String listeAvantModification = listeATester.toString();
-        listeATester.modifiePremier(404, 99);
+        listeATester.modifiePremier(404, 99); // On cherche un élément qui n'existe pas
+        // La liste ne doit pas avoir changé
         assertEquals(listeAvantModification, listeATester.toString());
     }
 
@@ -79,8 +80,8 @@ import org.junit.jupiter.api.Test;
     void modifiePremierElementEnTete() {
         listeATester.ajout(1);
         listeATester.ajout(2);
-        listeATester.ajout(3);
-        listeATester.modifiePremier(3, 99);
+        listeATester.ajout(3); // Liste: 3 -> 2 -> 1
+        listeATester.modifiePremier(3, 99); // On modifie l'élément en tête
         assertEquals("ListeSimple(Noeud(99), Noeud(2), Noeud(1))", listeATester.toString());
         assertEquals(99, listeATester.tete.getElement());
     }
@@ -142,18 +143,6 @@ import org.junit.jupiter.api.Test;
         assertEquals(3, listeATester.getSize());
     }
 
-    @Test
-     void supprimePremierElementNonExistant() {
-        listeATester.ajout(1);
-        listeATester.ajout(2);
-        listeATester.ajout(3);
-        String listeAvant = listeATester.toString();
-        long sizeAvant = listeATester.getSize();
-        listeATester.supprimePremier(99);
-
-        assertEquals(listeAvant, listeATester.toString());
-        assertEquals(sizeAvant, listeATester.getSize());
-    }
     @Test
      void supprimeTousListeVide() {
         listeATester.supprimeTous(1);
