@@ -63,6 +63,18 @@ import org.junit.jupiter.api.Test;
         listeATester.modifiePremier(2, 4);
         assertEquals("ListeSimple(Noeud(3), Noeud(4), Noeud(1))", listeATester.toString());
         assertEquals(4, listeATester.tete.getSuivant().getElement());
+
+        Noeud n = listeATester.tete;
+        listeATester.tete = null;
+        listeATester.modifiePremier(2, 4);
+        assertEquals(n, listeATester.tete);
+    }
+
+    @Test
+    void modifieListeVide() {
+        listeATester.modifiePremier(2, 4);
+        assertNull(listeATester.tete);
+        assertEquals(0, listeATester.getSize());
     }
 
     @Test
@@ -81,6 +93,11 @@ import org.junit.jupiter.api.Test;
         listeATester.supprimePremier(1);
         assertNull(listeATester.tete);
         assertEquals(0, listeATester.getSize());
+
+        Noeud n = listeATester.tete;
+        listeATester.tete = null;
+        listeATester.supprimePremier(1);
+        assertEquals(n, listeATester.tete);
     }
 
     @Test
@@ -257,5 +274,21 @@ import org.junit.jupiter.api.Test;
         listeATester.echanger(r1, r2);
         System.out.println(listeATester);
         assertEquals("ListeSimple(Noeud(4), Noeud(2), Noeud(3), Noeud(1), Noeud(5))", listeATester.toString());
+    }
+
+    @Test
+    void echangerDesNoeudsIdentiques() {
+        listeATester.ajout(5);
+        listeATester.ajout(4);
+        Noeud r1 = listeATester.tete;
+        listeATester.ajout(3);
+        listeATester.ajout(2);
+        Noeud r2 = listeATester.tete;
+        listeATester.ajout(1);
+        assertEquals("ListeSimple(Noeud(1), Noeud(2), Noeud(3), Noeud(4), Noeud(5))", listeATester.toString());
+        listeATester.echanger(r1, r1);
+        assertEquals("ListeSimple(Noeud(1), Noeud(2), Noeud(3), Noeud(4), Noeud(5))", listeATester.toString());
+        listeATester.echanger(r2, r2);
+        assertEquals("ListeSimple(Noeud(1), Noeud(2), Noeud(3), Noeud(4), Noeud(5))", listeATester.toString());
     }
 }
