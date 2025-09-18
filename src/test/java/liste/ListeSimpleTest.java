@@ -144,6 +144,20 @@ import org.junit.jupiter.api.Test;
     }
 
     @Test
+     void supprimePremierElementNonExistant() {
+        listeATester.ajout(1);
+        listeATester.ajout(2);
+        listeATester.ajout(3); // Liste: 3 -> 2 -> 1
+        String listeAvant = listeATester.toString();
+        long sizeAvant = listeATester.getSize();
+
+        listeATester.supprimePremier(99); // Essayer de supprimer un élément qui n'existe pas
+
+        // On vérifie que la liste et sa taille n'ont pas changé
+        assertEquals(listeAvant, listeATester.toString());
+        assertEquals(sizeAvant, listeATester.getSize());
+    }
+    @Test
      void supprimeTousListeVide() {
         listeATester.supprimeTous(1);
         assertNull(listeATester.tete);
