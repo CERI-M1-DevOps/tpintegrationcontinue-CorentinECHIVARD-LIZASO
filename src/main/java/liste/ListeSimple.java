@@ -8,11 +8,23 @@ public class ListeSimple {
         return size;
     }
 
+    /**
+     * Ajoute un élément en tête de liste
+     * 
+     * @param element l'élément à ajouter
+     */
     public void ajout(int element) {
         tete = new Noeud(element, tete);
         size++;
     }
 
+    /**
+     * Modifie la première occurrence de element dans la liste en nouvelleValeur
+     * 
+     * @param element l'élément à modifier
+     * @param nouvelleValeur la nouvelle valeur à mettre à la place de element
+     * @return true si l'élément a été modifié, false sinon (élément non trouvé)
+     */
     public void modifiePremier(Object element, Object nouvelleValeur) {
         Noeud courant = tete;
         while (courant != null && courant.getElement() != element)
@@ -21,6 +33,13 @@ public class ListeSimple {
             courant.setElement(nouvelleValeur);
     }
 
+    /**
+     * Modifie toutes les occurrences de element dans la liste en nouvelleValeur
+     * 
+     * @param element l'élément à modifier
+     * @param nouvelleValeur la nouvelle valeur à mettre à la place de element
+     * @return le nombre d'éléments modifiés
+     */
     public void modifieTous(Object element, Object nouvelleValeur) {
         Noeud courant = tete;
         while (courant != null) {
@@ -31,6 +50,11 @@ public class ListeSimple {
         }
     }
 
+    /**
+     * Retourne une représentation textuelle de la liste
+     * 
+     * @return une chaîne de caractères représentant la liste
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("ListeSimple(");
@@ -45,6 +69,12 @@ public class ListeSimple {
         return sb.toString();
     }
 
+    /**
+     * Supprime la première occurrence de element dans la liste
+     * 
+     * @param element l'élément à supprimer
+     * @return true si l'élément a été supprimé, false sinon (élé
+     */
     public void supprimePremier(Object element) {
         if (tete != null) {
             if (tete.getElement() == element) {
@@ -65,10 +95,23 @@ public class ListeSimple {
         }
     }
 
+    /**
+     * Supprime toutes les occurrences de element dans la liste
+     * 
+     * @param element l'élément à supprimer
+     * @return le nombre d'éléments supprimés
+     */
     public void supprimeTous(int element) {
        tete = supprimeTousRecurs(element, tete);
     }
 
+    /**
+     * Méthode récursive pour supprimer toutes les occurrences d'un élément dans la liste
+     * 
+     * @param element l'élément à supprimer
+     * @param tete le noeud courant de la liste
+     * @return le nouveau noeud tête de la liste après suppression
+     */
     public Noeud supprimeTousRecurs(Object element, Noeud tete) {
         if (tete != null) {
             Noeud suiteListe = supprimeTousRecurs(element, tete.getSuivant());
@@ -82,6 +125,11 @@ public class ListeSimple {
         } else return null;
     }
 
+    /**
+     * Retourne le noeud avant le dernier noeud de la liste
+     * 
+     * @return le noeud avant le dernier noeud, ou null si la liste est vide ou contient un seul noeud
+     */
     public Noeud getAvantDernier() {
         if (tete == null || tete.getSuivant() == null)
             return null;
@@ -96,6 +144,9 @@ public class ListeSimple {
         }
     }
 
+    /**
+     * Inverse la liste
+     */
     public void inverser() {
         Noeud precedent = null;
         Noeud courant = tete;
@@ -108,8 +159,13 @@ public class ListeSimple {
         tete = precedent;
     }
 
+    /**
+     * Retourne le noeud précédent le noeud r dans la liste
+     * 
+     * @param r le noeud dont on veut trouver le précédent
+     * @return le noeud précédent r, ou null si r est la tête ou n
+     */
     public Noeud getPrecedent(Noeud r) {
-    // la liste n'est pas vide puisqu'on transmet un Node de la liste et le Node existe obligatoirement
         Noeud precedent = tete;
         Noeud courant = precedent.getSuivant();
         while (courant != r) {
@@ -119,6 +175,12 @@ public class ListeSimple {
         return precedent;
     }
 
+    /**
+     * Échange les positions des noeuds r1 et r2 dans la liste
+     * 
+     * @param r1 le premier noeud à échanger
+     * @param r2 le second noeud à échanger
+     */
     public void echanger(Noeud r1, Noeud r2) {
         if (r1 == r2)
             return;
