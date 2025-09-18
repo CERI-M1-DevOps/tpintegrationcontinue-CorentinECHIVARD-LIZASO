@@ -1,0 +1,209 @@
+package liste;
+
+public class ListeSimple {
+    private long size;
+    Noeud tete;
+
+    public long getSize() {
+        return size;
+    }
+
+    /**
+     * Ajoute un élément en tête de liste
+     * 
+     * @param element l'élément à ajouter
+     */
+    public void ajout(int element) {
+        tete = new Noeud(element, tete);
+        size++;
+    }
+
+    /**
+     * Modifie la première occurrence de element dans la liste en nouvelleValeur
+     * 
+     * @param element l'élément à modifier
+     * @param nouvelleValeur la nouvelle valeur à mettre à la place de element
+     * @return true si l'élément a été modifié, false sinon (élément non trouvé)
+     */
+    public void modifiePremier(Object element, Object nouvelleValeur) {
+        Noeud courant = tete;
+        while (courant != null && courant.getElement() != element)
+            courant = courant.getSuivant();
+        if (courant != null)
+            courant.setElement(nouvelleValeur);
+    }
+
+    /**
+     * Modifie toutes les occurrences de element dans la liste en nouvelleValeur
+     * 
+     * @param element l'élément à modifier
+     * @param nouvelleValeur la nouvelle valeur à mettre à la place de element
+     * @return le nombre d'éléments modifiés
+     */
+    public void modifieTous(Object element, Object nouvelleValeur) {
+        Noeud courant = tete;
+        while (courant != null) {
+            if (courant.getElement() == element) {
+                courant.setElement(nouvelleValeur);
+            }
+            courant = courant.getSuivant();
+        }
+    }
+
+    /**
+     * Retourne une représentation textuelle de la liste
+     * 
+     * @return une chaîne de caractères représentant la liste
+     */
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("ListeSimple(");
+        Noeud n = tete;
+        while (n != null) {
+            sb.append(n);
+            n = n.getSuivant();
+            if (n != null)
+                sb.append(", ");
+        }
+        sb.append(")");
+        return sb.toString();
+    }
+
+    /**
+     * Supprime la première occurrence de element dans la liste
+     * 
+     * @param element l'élément à supprimer
+     * @return true si l'élément a été supprimé, false sinon (élé
+     */
+    public void supprimePremier(Object element) {
+        if (tete != null) {
+            if (tete.getElement() == element) {
+                tete = tete.getSuivant();
+                size--;
+                return;
+            }
+            Noeud precedent = tete;
+            Noeud courant = tete.getSuivant();
+            while (courant != null && courant.getElement() != element) {
+                precedent = precedent.getSuivant();
+                courant = courant.getSuivant();
+            }
+            if (courant != null) {
+                precedent.setSuivant(courant.getSuivant());
+                size--;
+            }
+        }
+    }
+
+    /**
+     * Supprime toutes les occurrences de element dans la liste
+     * 
+     * @param element l'élément à supprimer
+     * @return le nombre d'éléments supprimés
+     */
+    public void supprimeTous(int element) {
+       tete = supprimeTousRecurs(element, tete);
+    }
+
+    /**
+     * Méthode récursive pour supprimer toutes les occurrences d'un élément dans la liste
+     * 
+     * @param element l'élément à supprimer
+     * @param tete le noeud courant de la liste
+     * @return le nouveau noeud tête de la liste après suppression
+     */
+    public Noeud supprimeTousRecurs(Object element, Noeud tete) {
+        if (tete != null) {
+            Noeud suiteListe = supprimeTousRecurs(element, tete.getSuivant());
+            if (tete.getElement() == element) {
+                size--;
+                return suiteListe;
+            } else {
+                tete.setSuivant(suiteListe);
+                return tete;
+            }
+        } else return null;
+    }
+
+    /**
+     * Retourne le noeud avant le dernier noeud de la liste
+     * 
+     * @return le noeud avant le dernier noeud, ou null si la liste est vide ou contient un seul noeud
+     */
+    public Noeud getAvantDernier() {
+        if (tete == null || tete.getSuivant() == null)
+            return null;
+        else {
+            Noeud courant = tete;
+            Noeud suivant = courant.getSuivant();
+            while (suivant.getSuivant() != null) {
+                courant = suivant;
+                suivant = suivant.getSuivant();
+            }
+            return courant;
+        }
+    }
+
+    /**
+     * Inverse la liste
+     */
+    public void inverser() {
+        Noeud precedent = null;
+        Noeud courant = tete;
+        while (courant != null) {
+            Noeud next = courant.getSuivant();
+            courant.setSuivant(precedent);
+            precedent = courant;
+            courant = next;
+        }
+        tete = precedent;
+    }
+
+    /**
+     * Retourne le noeud précédent le noeud r dans la liste
+     * 
+     * @param r le noeud dont on veut trouver le précédent
+     * @return le noeud précédent r, ou null si r est la tête ou n
+     */
+    public Noeud getPrecedent(Noeud r) {
+        Noeud precedent = tete;
+        Noeud courant = precedent.getSuivant();
+        while (courant != r) {
+            precedent = courant;
+            courant = courant.getSuivant();
+        }
+        return precedent;
+    }
+
+    /**
+     * Échange les positions des noeuds r1 et r2 dans la liste
+     * 
+     * @param r1 le premier noeud à échanger
+     * @param r2 le second noeud à échanger
+     */
+    public void echanger(Noeud r1, Noeud r2) {
+        if (r1 == r2)
+            return;
+        Noeud precedentR1;
+        Noeud precedentR2;
+        if (r1 != tete && r2 != tete) {
+            precedentR1 = getPrecedent(r1);
+            precedentR2 = getPrecedent(r2);
+            precedentR1.setSuivant(r2);
+            precedentR2.setSuivant(r1);
+        } else if (r1 == tete) {
+            precedentR2 = getPrecedent(r2);
+            precedentR2.setSuivant(tete);
+            tete = r2;
+        }
+        else {
+            precedentR1 = getPrecedent(r1);
+            precedentR1.setSuivant(tete);
+            tete = r1;
+        }
+        Noeud temp = r2.getSuivant();
+        r2.setSuivant(r1.getSuivant());
+        r1.setSuivant(temp);
+    }
+
+}
