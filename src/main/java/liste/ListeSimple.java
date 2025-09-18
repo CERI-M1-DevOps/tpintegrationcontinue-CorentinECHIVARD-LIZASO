@@ -23,7 +23,6 @@ public class ListeSimple {
      * 
      * @param element l'élément à modifier
      * @param nouvelleValeur la nouvelle valeur à mettre à la place de element
-     * @return true si l'élément a été modifié, false sinon (élément non trouvé)
      */
     public void modifiePremier(Object element, Object nouvelleValeur) {
         Noeud courant = tete;
@@ -38,7 +37,6 @@ public class ListeSimple {
      * 
      * @param element l'élément à modifier
      * @param nouvelleValeur la nouvelle valeur à mettre à la place de element
-     * @return le nombre d'éléments modifiés
      */
     public void modifieTous(Object element, Object nouvelleValeur) {
         Noeud courant = tete;
@@ -73,7 +71,6 @@ public class ListeSimple {
      * Supprime la première occurrence de element dans la liste
      * 
      * @param element l'élément à supprimer
-     * @return true si l'élément a été supprimé, false sinon (élé
      */
     public void supprimePremier(Object element) {
         if (tete != null) {
@@ -99,7 +96,6 @@ public class ListeSimple {
      * Supprime toutes les occurrences de element dans la liste
      * 
      * @param element l'élément à supprimer
-     * @return le nombre d'éléments supprimés
      */
     public void supprimeTous(int element) {
        tete = supprimeTousRecurs(element, tete);
@@ -163,7 +159,7 @@ public class ListeSimple {
      * Retourne le noeud précédent le noeud r dans la liste
      * 
      * @param r le noeud dont on veut trouver le précédent
-     * @return le noeud précédent r, ou null si r est la tête ou n
+     * @return le noeud précédent r, ou null si r est la tête ou n'est pas dans la liste
      */
     public Noeud getPrecedent(Noeud r) {
         Noeud precedent = tete;
